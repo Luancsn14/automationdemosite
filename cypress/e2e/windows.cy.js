@@ -1,7 +1,3 @@
-Cypress.on('uncaught:exception', (err, runnable) => {
-    return false;
-  });
-  
 describe('Windows', () => {
   beforeEach(() => {
     cy.visit('/Windows.html')

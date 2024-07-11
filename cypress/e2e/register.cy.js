@@ -1,9 +1,5 @@
 import { faker } from '@faker-js/faker';
 
-Cypress.on('uncaught:exception', (err, runnable) => {
-  return false;
-});
-
 describe('Register', () => {
   beforeEach(() => {
     cy.visit('/Register.html')

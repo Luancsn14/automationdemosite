@@ -1,7 +1,3 @@
-Cypress.on('uncaught:exception', (err, runnable) => {
-    return false;
-  });
-  
 describe('Alerts', () => {
   beforeEach(() => {
     cy.visit('/Alerts.html')

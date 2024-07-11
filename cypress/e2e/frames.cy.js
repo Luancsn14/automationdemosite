@@ -1,9 +1,5 @@
 import 'cypress-iframe' // npm install -D cypress-iframe
 
-Cypress.on('uncaught:exception', (err, runnable) => {
-    return false;
-  });
-  
 describe('Frames', () => {
   beforeEach(() => {
     cy.visit('/Frames.html')

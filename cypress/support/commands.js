@@ -1,25 +1,60 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+Cypress.Commands.add('selectYear', (yearName) => {
+
+    const currentYear = new Date().getFullYear()
+
+    cy.get('.ui-datepicker-year').then(($year) => {
+        if ($year.text() == yearName) {
+            cy.log(yearName + ' year is selected')
+            return
+        }
+        else {
+            if (yearName < currentYear) {
+                cy.get('a.ui-datepicker-prev').click()
+            }
+            else if (yearName > currentYear) {
+                cy.get('a.ui-datepicker-next').click()
+            }
+
+        }
+        cy.selectYear(yearName)
+    })
+
+});
+
+import { DateUtils } from "./dateUtils/DateUtils"
+var dateutils = new DateUtils()
+
+Cypress.Commands.add('selectMonth', (monthName) => {
+
+    let currentMonth = new Date().getMonth
+    let givenMonth = dateutils.getMonthIndexFromName(monthName)
+
+    cy.get('.ui-datepicker-month').then(($month) => {
+        if ($month.text() == monthName) {
+            cy.log(monthName + ' month is selected')
+            return
+        }
+        else {
+            if (monthName < currentMonth) {
+                cy.get('a.ui-datepicker-prev').click()
+            }
+            else if (monthName > currentMonth) {
+                cy.get('a.ui-datepicker-next').click()
+            }
+
+        }
+        cy.selectMonth(monthName)
+    })
+
+});
+
+Cypress.Commands.add('selectOneDay', (dayName) => {
+
+    cy.get('table.ui-datepicker-calendar a.ui-state-default').eq(dayName - 1).click()
+    cy.log(dayName + ' day is selected')
+
+});
