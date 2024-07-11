@@ -1,5 +1,3 @@
-
-
 describe('Datepicker', () => {
   beforeEach(() => {
     cy.visit('/Datepicker.html')
