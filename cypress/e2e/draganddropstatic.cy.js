@@ -4,9 +4,8 @@ describe('Drag and Drop Static', () => {
     })
 
     it('Drag and Drop', () => {
-      cy.draganddrop('#angular')
-      cy.draganddrop('#mongo')
-      cy.draganddrop('#node')      
+      cy.draganddropstatic('#angular')
+      cy.draganddropstatic('#mongo')
+      cy.draganddropstatic('#node')      
     })
-
 })

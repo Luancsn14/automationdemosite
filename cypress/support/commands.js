@@ -61,7 +61,7 @@ Cypress.Commands.add('selectOneDay', (dayName) => {
 
 });
 
-Cypress.Commands.add('draganddrop', (item) => {
+Cypress.Commands.add('draganddropstatic', (item) => {
     const dataTransfer = new DataTransfer();
 
     cy.get(item).trigger('dragstart', {
@@ -73,5 +73,20 @@ Cypress.Commands.add('draganddrop', (item) => {
     })
     
     cy.get('#droparea > ' + item)
+      .should('be.visible')
+})
+
+Cypress.Commands.add('draganddropdynamic', (item) => {
+    const dataTransfer = new DataTransfer();
+
+        cy.get(item).trigger('dragstart', {
+            dataTransfer
+        })
+   
+        cy.get('#droparea').trigger('drop', {
+            dataTransfer
+        })
+    
+    cy.get('.dragged > ' + item)
       .should('be.visible')
 })
