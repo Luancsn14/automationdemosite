@@ -1,3 +1,5 @@
+import '@4tw/cypress-drag-drop' // npm install --save-dev @4tw/cypress-drag-drop
+
 Cypress.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -58,3 +60,18 @@ Cypress.Commands.add('selectOneDay', (dayName) => {
     cy.log(dayName + ' day is selected')
 
 });
+
+Cypress.Commands.add('draganddrop', (item) => {
+    const dataTransfer = new DataTransfer();
+
+    cy.get(item).trigger('dragstart', {
+        dataTransfer
+    })
+   
+    cy.get('#droparea').trigger('drop', {
+        dataTransfer
+    })
+    
+    cy.get('#droparea > ' + item)
+      .should('be.visible')
+})
