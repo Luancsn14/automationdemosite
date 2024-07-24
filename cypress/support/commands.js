@@ -74,7 +74,7 @@ Cypress.Commands.add('draganddropstatic', (item) => {
     
     cy.get('#droparea > ' + item)
       .should('be.visible')
-})
+});
 
 Cypress.Commands.add('draganddropdynamic', (item) => {
     const dataTransfer = new DataTransfer();
@@ -89,4 +89,4 @@ Cypress.Commands.add('draganddropdynamic', (item) => {
     
     cy.get('.dragged > ' + item)
       .should('be.visible')
-})
+});
